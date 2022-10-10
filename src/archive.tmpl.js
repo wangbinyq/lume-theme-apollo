@@ -1,11 +1,13 @@
 export const layout = "layouts/archive.njk";
 export const title = "Archive";
 
-export default function* ({ search, paginate }) {
+export default function* ({ search, paginate, theme }) {
   const posts = search.pages("type=post", "date=desc");
 
+  console.log(theme?.paginate_size)
+
   for (
-    const data of paginate(posts, { url, size: 10 })
+    const data of paginate(posts, { url, size: theme?.paginate_size || 10 })
   ) {
     // Show the first page in the menu
     if (data.pagination.page === 1) {

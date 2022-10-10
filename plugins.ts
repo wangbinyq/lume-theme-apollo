@@ -29,6 +29,10 @@ export default function () {
       .preprocess([".md"], (page: Page) => {
         page.data.excerpt ??=
           (page.data.content as string).split("<!--more-->")[0];
+        page.data.content = (page.data.content as string).replace(
+          "<!--more-->",
+          '<a id="more"></a>',
+        );
       });
 
     // Highlight.js stylesheet

@@ -12,7 +12,6 @@ title: Home
   <div class="search" id="search"></div>
 </header>
 
-
 <section class="postList">
   {% asyncEach post in postslist %}
   <article class="post">
@@ -26,6 +25,8 @@ title: Home
       {% set date = post.data.date %}
       {% set tags = post.data.tags %}
       {% set author = post.data.author %}
+      {% set index = true %}
+      {% set post = post.data %}
       {% include "templates/post-details.njk" %}
     </header>
 
@@ -33,7 +34,7 @@ title: Home
       {{ post.data.excerpt | md | safe }}
     </div>
   </article>
-{% endeach %}
+  {% endeach %}
 </section>
 
 <hr>

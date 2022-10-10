@@ -1,24 +1,107 @@
-<div class="post-details">
-  <p>
-    {% if author %}
-      {% set page = search.page("type=author author='" + author + "'") %}
-      {% if page %}
-        By <a data-pagefind-filter="author" href="{{ page.data.url }}">{{ author }}</a> | 
+<article id="{{ post.layout }}-{{ post.url }}" class="post">
+  <header class="entry-meta-header">
+    <span class="meta-elements date">
+      <a href="{{ post.url }}" class="article-date">
+        <time datetime="{{date.toISOString()}}" itemprop="datePublished">
+          {{ date | date() }}
+        </time>
+      </a>
+    </span>
+    <span class="meta-elements author">{{ autor or site.author?.name }}</span>
+    <div class="commentscount">
+      {% if theme.disqus_shortname %}
+        <a href="{{ post.url | url(true) }}#disqus_thread" class="article-comment-link">评论</a>
+      {% endif %}
+    </div>
+  </header>
+
+  {# todo #}
+  {% if photos and post.photos.length %}
+    <div class="article-gallery">
+      <div class="article-gallery-photos">
+        {% for photo in post.photo %}
+          <a class="article-gallery-img fancybox" href="{{ photo }}">
+            <img src="{{ photo }}" itemprop="image">
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+  <header class="entry-header">
+    <h1 itemprop="name" class="entry-title">
+      <a class="article-title" href="{{post.url}}" itemprop="url">{{ post.title }}</a>
+    </h1>
+  </header>
+  <div class="entry-content">
+    {% if post.excerpt and index %}
+      {{ post.excerpt | md | safe }}
+      {% if theme.more_link %}
+        <p class="more">
+          <a href="{{ post.url }}#more">继续阅读</a>
+        </p>
       {% endif %}
     {% else %}
-    By {{ author or site.author.name }} | 
+      {{ post.content | md | safe }}
     {% endif %}
 
-    <time datetime="{{ date | date('DATETIME') }}">
-      {{ date | date('HUMAN_DATE') }}
-    </time>
+  </div>
+  <footer class="entry-footer">
+    <div class="entry-meta-footer">
+      {# <span class="category"></span> #}
+      <span class="tags">
+        {% if post.tags and post.tags.length %}
+          <ul class="article-tag-list" itemprop="keywords">
+            {% for tag in post.tags %}
+              {% set page = search.page("type=tag tag='" + tag + "'") %}
+              {% if page %}
+                <li class="article-tag-list-item">
+                  <a data-pagefind-filter="filter"
+                    class="article-tag-list-link" rel="tag"
+                    href="{{ page.data.url }}">{{ tag }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
 
-    {% for tag in tags %}
-      {% set page = search.page("type=tag tag='" + tag + "'") %}
+        {% endif %}
+      </span>
+    </div>
+  </footer>
+  {% if index %}
+  {% else %}
+    {%- set previousPost = search.previousPage(post.url, "type=post") %}
+    {%- set nextPost = search.nextPage(post.url, "type=post") %}
+    {% if previousPost or nextPost %}
+      <nav id="article-nav">
+        {% if previousPost %}
+          <a href="{{previousPost.data.url}}" id="article-nav-newer" class="article-nav-link-wrap" rel="prev">
+            <strong class="article-nav-caption">« 上一篇</strong>
+            <div class="article-nav-title">
+              {{ previousPost.data.title }}
+            </div>
+          </a>
+        {% endif %}
+        {% if nextPost %}
+          <a href="{{nextPost.data.url}}" id="article-nav-older" class="article-nav-link-wrap" rel="next">
+            <strong class="article-nav-caption">下一篇 »</strong>
+            <div class="article-nav-title">
+              {{ nextPost.data.title }}
+            </div>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
 
-      {% if page %}
-        | <a data-pagefind-filter="filter" href="{{ page.data.url }}">{{ tag }}</a>
-      {% endif %}
-    {% endfor %}
-  </p>
-</div>
+</article>
+
+{% if index %}
+  <hr class="article-divider">
+{% elif post.comments and theme.disqus_shortname %}
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+      </noscript>
+    </div>
+  </section>
+{% endif %}

@@ -10,3 +10,9 @@ metas:
 
 mergedKeys:
   metas: object
+
+theme:
+  fancy: true
+  disqus_shortname: 285210
+  more_link: true
+  paginate_size: 2

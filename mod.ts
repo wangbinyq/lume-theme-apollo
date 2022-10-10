@@ -9,14 +9,6 @@ export default function () {
 
     // Add remote files
     const files = [
-      "_includes/css/fonts.css",
-      "_includes/css/navbar.css",
-      "_includes/css/page.css",
-      "_includes/css/post-list.css",
-      "_includes/css/post.css",
-      "_includes/css/reset.css",
-      "_includes/css/variables.css",
-      "_includes/css/search.css",
       "_includes/layouts/archive_result.njk",
       "_includes/layouts/archive.njk",
       "_includes/layouts/base.njk",
@@ -35,6 +27,7 @@ export default function () {
       "feed.tmpl.js",
       "feed.xml.njk",
       "index.njk",
+      "main.js",
       "styles.css",
       "favicon.png",
     ];
