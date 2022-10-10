@@ -7,7 +7,7 @@
         </time>
       </a>
     </span>
-    <span class="meta-elements author">{{ autor or site.author?.name }}</span>
+    <span class="meta-elements author">{{ autor or theme.author }}</span>
     <div class="commentscount">
       {% if theme.disqus_shortname %}
         <a href="{{ post.url | url(true) }}#disqus_thread" class="article-comment-link">Comments</a>

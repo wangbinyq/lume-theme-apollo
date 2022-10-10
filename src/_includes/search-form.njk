@@ -1,0 +1,4 @@
+<form action="//google.com/search" method="get" accept-charset="utf-8">
+  <input type="search" name="q" results="0" placeholder="{{ theme.search_index or 'Search In Google' }}">
+  <input type="hidden" name="q" value="site:{{ '/' | url(true) }}">
+</form>

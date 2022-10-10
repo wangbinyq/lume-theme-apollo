@@ -21,30 +21,33 @@
           <a href="{{ '' | url(true) }}">{{ metas.site }}</a>
         </h1>
         <nav class="nav">
-          <ul>
-            <% for (var i in theme.menu) { %>
-              <li>
-                <a href="<%- theme.menu[i] %>"><%= i %></a>
+          <ul class="nav-menu">
+            {% for menu, link in theme.menu %}
+              <li class="nav-menu-item">
+                <a href="{{ link }}">{{ menu }}</a>
               </li>
-            <% } %>
-            <li>
-              <a id="nav-search-btn" class="nav-icon" title="<%- __('index.search') %>"></a>
+            {% endfor %}
+            <li class="nav-menu-item">
+              <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
             </li>
-            <li>
+            <li class="nav-menu-item">
               <a href="/feed.xml" id="nav-rss-link" class="nav-icon" title="RSS 订阅"></a>
             </li>
           </ul>
         </nav>
         <div id="search-form-wrap">
-          <%- search_form({text: __('index.search'), button: '&#xF002;'}) %>
-          </div>
+          <form class="search-form" action="//google.com/search" method="get" accept-charset="utf-8">
+            <input class="search-form-input" type="search" name="q" results="0" placeholder="搜索">
+            <button class="search-form-submit" type="submit" class="search-form-submit">&#xF002;</button>
+            <input type="hidden" name="q" value="site:{{ '/' | url(true) }}">
+          </form>
         </header>
         <main class="{{ bodyClass }}">
           {{ content | safe }}
         </main>
         <div class="mb-search">
           <form action="//google.com/search" method="get" accept-charset="utf-8">
-            <input type="search" name="q" results="0" placeholder="{{ theme.search_index or 'Search In Google' }}">
+            <input type="search" name="q" results="0" placeholder="搜索">
             <input type="hidden" name="q" value="site:{{ '/' | url(true) }}">
           </form>
         </div>

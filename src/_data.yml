@@ -1,6 +1,3 @@
-home:
-  welcome: Hello, I am a person that writes stuff.
-
 # Metas plugin https://lume.land/plugins/metas/#description
 metas:
   site: Blog name
@@ -15,3 +12,7 @@ theme:
   fancy: true
   disqus_shortname: 285210
   more_link: true
+  author: wangb
+  menu:
+    主页: /
+    标签: /tags 
