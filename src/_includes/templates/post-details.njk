@@ -10,7 +10,7 @@
     <span class="meta-elements author">{{ autor or site.author?.name }}</span>
     <div class="commentscount">
       {% if theme.disqus_shortname %}
-        <a href="{{ post.url | url(true) }}#disqus_thread" class="article-comment-link">评论</a>
+        <a href="{{ post.url | url(true) }}#disqus_thread" class="article-comment-link">Comments</a>
       {% endif %}
     </div>
   </header>
@@ -75,7 +75,7 @@
       <nav id="article-nav">
         {% if previousPost %}
           <a href="{{previousPost.data.url}}" id="article-nav-newer" class="article-nav-link-wrap" rel="prev">
-            <strong class="article-nav-caption">« 上一篇</strong>
+            <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
               {{ previousPost.data.title }}
             </div>
@@ -83,7 +83,7 @@
         {% endif %}
         {% if nextPost %}
           <a href="{{nextPost.data.url}}" id="article-nav-older" class="article-nav-link-wrap" rel="next">
-            <strong class="article-nav-caption">下一篇 »</strong>
+            <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">
               {{ nextPost.data.title }}
             </div>

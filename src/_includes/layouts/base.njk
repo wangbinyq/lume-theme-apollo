@@ -30,11 +30,9 @@
             <li>
               <a id="nav-search-btn" class="nav-icon" title="<%- __('index.search') %>"></a>
             </li>
-            <% if (theme.rss) { %>
-              <li>
-                <a href="<%- theme.rss %>" id="nav-rss-link" class="nav-icon" title="<%- __('index.feed') %>"></a>
-              </li>
-            <% } %>
+            <li>
+              <a href="/feed.xml" id="nav-rss-link" class="nav-icon" title="RSS 订阅"></a>
+            </li>
           </ul>
         </nav>
         <div id="search-form-wrap">

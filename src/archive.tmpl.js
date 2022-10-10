@@ -4,10 +4,8 @@ export const title = "Archive";
 export default function* ({ search, paginate, theme }) {
   const posts = search.pages("type=post", "date=desc");
 
-  console.log(theme?.paginate_size)
-
   for (
-    const data of paginate(posts, { url, size: theme?.paginate_size || 10 })
+    const data of paginate(posts, { url, size: theme?.paginate_size || 20 })
   ) {
     // Show the first page in the menu
     if (data.pagination.page === 1) {
@@ -23,7 +21,7 @@ export default function* ({ search, paginate, theme }) {
 
 function url(n) {
   if (n === 1) {
-    return "/archive/";
+    return "/";
   }
 
   return `/archive/${n}/`;
